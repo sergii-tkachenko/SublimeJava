@@ -243,39 +243,35 @@ public class SublimeJava
         if (p != null)
             return true;
 
-        packageName = packageName.replace(".", File.pathSeparator);
+        packageName = packageName.replace(".", File.separator);
 
+        // -returntype;;--;;org;;--;;quartz
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         for (String s : getClasspathEntries())
         {
             URL url = classLoader.getResource(s + File.pathSeparator + packageName);
             if (url != null)
                 return true;
-            else
-                url = classLoader.getResource(s);
-            if (url == null)
-                continue;
+            url = classLoader.getResource(packageName);
 
-            String filename = URLDecoder.decode(url.getFile(), "UTF-8");
+            if (url != null && url.getProtocol().equals("jar")) {
+              String filename = URLDecoder.decode(url.getFile(), "UTF-8");
+              filename = filename.substring(5, filename.indexOf("!"));
 
-            if (url.getProtocol().equals("jar"))
-            {
-                filename = filename.substring(5, filename.indexOf("!"));
-
-                JarFile jf = new JarFile(filename);
-                Enumeration<JarEntry> entries = jf.entries();
-                while (entries.hasMoreElements())
-                {
-                    String name = entries.nextElement().getName();
-                    if (name.startsWith(packageName))
-                    {
-                        return true;
-                    }
-                }
+              JarFile jf = new JarFile(filename);
+              Enumeration<JarEntry> entries = jf.entries();
+              while (entries.hasMoreElements())
+              {
+                  String name = entries.nextElement().getName();
+                  if (name.startsWith(packageName))
+                  {
+                      return true;
+                  }
+              }
             }
             else
             {
-                File folder = new File(filename + File.pathSeparator + packageName);
+                File folder = new File(s + File.separator + packageName);
                 if (folder.exists())
                     return true;
             }
