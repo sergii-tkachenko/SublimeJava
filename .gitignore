@@ -3,3 +3,5 @@ release
 *.class
 *.sublime-project
 *.sublime-workspace
+.coverage
+*,cover
