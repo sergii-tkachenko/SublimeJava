@@ -28,8 +28,8 @@ import bisect
 import imp
 
 import sys
-sys.path.append('./completioncommon');
-import completioncommon;
+sys.path.append(os.path.join(os.path.dirname(__file__), 'completioncommon'))
+import completioncommon
 
 try:
     import SublimeJava.classopener as classopener
