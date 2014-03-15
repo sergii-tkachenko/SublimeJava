@@ -27,13 +27,8 @@ import re
 import bisect
 import imp
 
-def reload(mod):
-    n = mod.__file__
-    if n[-1] == 'c':
-        n = n[:-1]
-    globals()[mod.__name__] = imp.load_source(mod.__name__, n)
-completioncommon = imp.load_source("completioncommon", os.path.join(os.path.dirname(os.path.abspath(__file__)), "sublimecompletioncommon/completioncommon.py"))
-completioncommon.reload(completioncommon)
+sys.path.append('./completioncommon');
+import completioncommon;
 
 try:
     import SublimeJava.classopener as classopener
