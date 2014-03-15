@@ -36,7 +36,7 @@ import imp
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'parsehelp'))
-import parsehelp
+from parsehelp import parsehelp
 
 language_regex = re.compile("(?<=source\.)[\w+\-#]+")
 member_regex = re.compile("(([a-zA-Z_]+[0-9_]*)|([\)\]])+)(\.)$")
