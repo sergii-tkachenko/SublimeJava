@@ -27,6 +27,7 @@ import re
 import bisect
 import imp
 
+import sys
 sys.path.append('./completioncommon');
 import completioncommon;
 
