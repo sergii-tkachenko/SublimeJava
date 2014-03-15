@@ -35,14 +35,9 @@ import os.path
 import imp
 import sys
 
-def reload(mod):
-    n = mod.__file__
-    if n[-1] == 'c':
-        n = n[:-1]
-    globals()[mod.__name__] = imp.load_source(mod.__name__, n)
+sys.path.append(os.path.join(os.path.dirname(__file__), 'parsehelp'))
+import parsehelp
 
-parsehelp = imp.load_source("parsehelp", os.path.join(os.path.dirname(os.path.abspath(__file__)), "parsehelp/parsehelp.py"))
-reload(parsehelp)
 language_regex = re.compile("(?<=source\.)[\w+\-#]+")
 member_regex = re.compile("(([a-zA-Z_]+[0-9_]*)|([\)\]])+)(\.)$")
 
