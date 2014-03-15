@@ -44,7 +44,7 @@ class SublimeJavaDotComplete(completioncommon.CompletionCommonDotComplete):
 
 class SublimeJavaCompletion(completioncommon.CompletionCommon):
     def __init__(self):
-        super(SublimeJavaCompletion, self).__init__("SublimeJava.sublime-settings", os.path.dirname(os.path.abspath(__file__)))
+        super(SublimeJavaCompletion, self).__init__("SublimeJava.sublime-settings", os.path.dirname(__file__))
         self.regex = [
             (re.compile(r"\[I([,)}]|$)"), r"int[]\1"),
             (re.compile(r"\[F([,)}]|$)"), r"float[]\1"),
