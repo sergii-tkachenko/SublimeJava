@@ -107,4 +107,4 @@ class JavaDocOpener(JavaClassOpener):
                 yield classname, (root_name + "/" + filename)
 
     def _view_file(self, filename):
-        webbrowser.open_new(filename)
+        webbrowser.open_new('file://' + filename)
